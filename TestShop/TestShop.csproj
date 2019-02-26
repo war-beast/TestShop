@@ -183,6 +183,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -219,13 +222,53 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\css\bootstrap.css" />
+    <Content Include="Areas\Admin\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\css\custom.css" />
+    <Content Include="Areas\Admin\css\font-awesome.min.css" />
+    <Content Include="Areas\Admin\css\grasp_mobile_progress_circle-1.0.0.min.css" />
+    <Content Include="Areas\Admin\css\owl.video.play.png" />
+    <Content Include="Areas\Admin\css\style.blue.css" />
+    <Content Include="Areas\Admin\css\style.default.css" />
+    <Content Include="Areas\Admin\css\style.green.css" />
+    <Content Include="Areas\Admin\css\style.pink.css" />
+    <Content Include="Areas\Admin\css\style.red.css" />
+    <Content Include="Areas\Admin\css\style.sea.css" />
+    <Content Include="Areas\Admin\css\style.violet.css" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\img\avatar-1.jpg" />
+    <Content Include="Areas\Admin\img\favicon.ico" />
+    <Content Include="Areas\Admin\img\loader.gif" />
+    <Content Include="Areas\Admin\js\bootstrap.js" />
+    <Content Include="Areas\Admin\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\js\charts-custom.js" />
+    <Content Include="Areas\Admin\js\charts-home.js" />
+    <Content Include="Areas\Admin\js\custom.js" />
+    <Content Include="Areas\Admin\js\front.js" />
+    <Content Include="Areas\Admin\js\grasp_mobile_progress_circle-1.0.0.min.js" />
+    <Content Include="Areas\Admin\js\handlebars-v4.0.11.js" />
+    <Content Include="Areas\Admin\js\jquery-1.10.2.min.js" />
+    <Content Include="Areas\Admin\js\jquery.cookie.js" />
+    <Content Include="Areas\Admin\js\jquery.nicescroll.min.js" />
+    <Content Include="Areas\Admin\js\jquery.validate.min.js" />
+    <Content Include="Areas\Admin\js\tether.min.js" />
+    <Content Include="Areas\Admin\js\waterbubble.min.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -255,6 +298,22 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\css\bootstrap.css.map" />
+    <Content Include="Areas\Admin\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Alert.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ClearLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -266,6 +325,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -283,6 +343,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Category\" />
+    <Folder Include="Photos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

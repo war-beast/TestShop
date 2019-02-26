@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="nofollow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="~/Areas/Secure/css/bootstrap.min.css" />
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="~/Areas/Secure/css/style.sea.css" id="theme-stylesheet">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="~/Areas/Secure/css/grasp_mobile_progress_circle-1.0.0.min.css" />
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="~/Areas/Secure/css/custom.css" />
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="~/Areas/Secure/img/favicon.ico" />
+    <link rel="stylesheet" href="~/Areas/Secure/css/font-awesome.min.css" />
+</head>
+<body>
+    @RenderBody()
+    <footer class="main-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Your company &copy; 2017-2019</p>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
+                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Ошибка</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javascript files-->
+    <script src="~/Areas/Secure/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Areas/Secure/js/tether.min.js"></script>
+    <script src="~/Areas/Secure/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Secure/js/jquery.cookie.js"></script>
+    <script src="~/Areas/Secure/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="~/Areas/Secure/js/jquery.nicescroll.min.js"></script>
+    <script src="~/Areas/Secure/js/jquery.validate.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="js/charts-home.js"></script>-->
+    <script src="~/Areas/Secure/js/front.js"></script>
+    <script src="~/Areas/Secure/js/handlebars-v4.0.11.js"></script>
+    <script src="~/Areas/Secure/js/custom.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

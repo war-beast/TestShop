@@ -21,7 +21,7 @@ namespace TestShop.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ShopEntities", throwIfV1Schema: false)
         {
         }
         

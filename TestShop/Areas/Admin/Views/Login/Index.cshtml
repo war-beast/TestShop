@@ -1,0 +1,62 @@
+﻿@{
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Areas/Secure/Views/Shared/_ClearLayout.cshtml";
+}
+
+<div class="page login-page">
+    <div class="container">
+        <div class="form-outer text-center d-flex align-items-center">
+            <div class="form-inner">
+                <div class="logo text-uppercase"><span>Dash</span><strong class="text-primary">Express</strong></div>
+                <p>Вход в панель управления.</p>
+                <form id="login-form" method="post">
+                    <div class="form-group">
+                        <label for="username" class="label-custom">Email</label>
+                        <input id="username" type="text" name="loginUsername" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="label-custom">Пароль</label>
+                        <input id="password" type="password" name="loginPassword" required="">
+                    </div><a id="login" href="#" class="btn btn-primary">Войти</a>
+                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                </form>@*<a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>*@
+            </div>
+            <div class="copyrights text-center">
+                <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            //...........................
+            var tokenKey = "tokenInfo";
+            $('#login').click(function (e) {
+                var initialInner = $("#submitLogin").html();
+                $("#submitLogin").html("<img src='/Secure/Img/loader.gif' />");
+                e.preventDefault();
+                var loginData = {
+                    grant_type: 'password',
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Token',
+                    data: loginData
+                }).complete(function (data) {
+                    localStorage.setItem(tokenKey, data.responseJSON.access_token);
+                    $("#submitLogin").html(initialInner);
+
+                    if (data.responseJSON.access_token !== "")
+                        window.location.href = "";
+                });
+            });
+    </script>
+}

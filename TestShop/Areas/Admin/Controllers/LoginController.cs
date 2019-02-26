@@ -1,0 +1,43 @@
+﻿using Microsoft.AspNet.Identity.Owin;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using TestShop.Models;
+
+namespace TestShop.Areas.Admin.Controllers
+{
+    public class LoginController : AsyncController
+    {
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        // GET: Admin/Login
+        public async Task<ActionResult> Index()
+        {
+            var admin = await UserManager.FindByNameAsync("test@shop.ru");
+            if (admin == null)
+                await InitializeAdminAsync();
+
+            return View();
+        }
+
+        private async Task InitializeAdminAsync()
+        {
+            ApplicationUser admin = new ApplicationUser { Email = "test@shop.ru", PhoneNumber = "+79051111111", UserName = "test@shop.ru" };
+            await UserManager.CreateAsync(admin, "123456");
+        }
+    }
+}
