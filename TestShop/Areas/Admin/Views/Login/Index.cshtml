@@ -2,7 +2,7 @@
                 /**/
 
                 ViewBag.Title = "Index";
-                Layout = "~/Areas/Secure/Views/Shared/_ClearLayout.cshtml";
+                Layout = "~/Areas/Admin/Views/Shared/_ClearLayout.cshtml";
 }
 
 <div class="page login-page">
@@ -21,7 +21,10 @@
                         <input id="password" type="password" name="loginPassword" required="">
                     </div><a id="login" href="#" class="btn btn-primary">Войти</a>
                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
-                </form>@*<a href="#" class="forgot-pass">Forgot Password?</a><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>*@
+                </form>
+                <div>
+                    <span id="errMessage"></span>
+                </div>
             </div>
             <div class="copyrights text-center">
                 <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
@@ -37,8 +40,8 @@
             //...........................
             var tokenKey = "tokenInfo";
             $('#login').click(function (e) {
-                var initialInner = $("#submitLogin").html();
-                $("#submitLogin").html("<img src='/Secure/Img/loader.gif' />");
+                var initialInner = $("#login").html();
+                $("#login").html("<img src='/Secure/Img/loader.gif' />");
                 e.preventDefault();
                 var loginData = {
                     grant_type: 'password',
@@ -51,12 +54,15 @@
                     url: '/Token',
                     data: loginData
                 }).complete(function (data) {
-                    localStorage.setItem(tokenKey, data.responseJSON.access_token);
-                    $("#submitLogin").html(initialInner);
-
-                    if (data.responseJSON.access_token !== "")
-                        window.location.href = "";
+                    if (data.responseJSON.error === undefined) {
+                        localStorage.setItem(tokenKey, data.responseJSON.access_token);
+                        $("#submitLogin").html(initialInner);
+                    }
+                    else {
+                        $("#errMessage").html(data.responseJSON.error_description);
+                    }
                 });
             });
+        });
     </script>
 }

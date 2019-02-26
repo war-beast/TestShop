@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,17 @@ namespace TestShop.Areas.Admin.Controllers
 
         private async Task InitializeAdminAsync()
         {
-            ApplicationUser admin = new ApplicationUser { Email = "test@shop.ru", PhoneNumber = "+79051111111", UserName = "test@shop.ru" };
-            await UserManager.CreateAsync(admin, "123456");
+            using (var context = new ApplicationDbContext())
+            {
+                ApplicationUser admin = new ApplicationUser { Email = "test@shop.ru", PhoneNumber = "+79051111111", UserName = "test@shop.ru" };
+                IdentityResult result = await UserManager.CreateAsync(admin, "123456");
+
+                if (!result.Succeeded)
+                {
+                    string s = "";
+                }
+                //await context.SaveChangesAsync();
+            }
         }
     }
 }

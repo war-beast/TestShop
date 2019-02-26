@@ -21,7 +21,8 @@ namespace TestShop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var categories = unitOfWork.Categories.GetAll();
-            return View();
+            var list = categories.ToList();
+            return View(categories);
         }
 
         protected override void Dispose(bool disposing)
