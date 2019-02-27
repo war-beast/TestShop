@@ -30,17 +30,17 @@ namespace TestShop.Repositories
 
         public IEnumerable<Category> Find(Func<Category, bool> predicate)
         {
-            return db.Categories.Where(predicate).ToList();
+            return db.Categories.Include(ct => ct.Products).Where(predicate).ToList();
         }
 
         public Category Get(int id)
         {
-            return db.Categories.Find(id);
+            return db.Categories.Include(ct => ct.Products).FirstOrDefault(ct => ct.Id == id);
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return db.Categories;
+            return db.Categories.Include(ct => ct.Products);
         }
 
         public void Update(Category item)

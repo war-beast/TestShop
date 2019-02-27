@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestShop.Models
 {
     public class Order
     {
         public int Id { get; set; }
+        [Display(Name = "Сумма заказа")]
         public decimal Sum { get; set; }
-        public string CustomerName { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+        [Display(Name = "Адрес")]
         public string Address { get; set; }
+        [Display(Name = "Статус заказа")]
         public string State { get; set; }
+        [Display(Name = "Дата")]
         public DateTime Date { get; set; }
 
         public ICollection<Product> Products { get; set; }

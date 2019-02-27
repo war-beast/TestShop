@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestShop.Areas.Admin.Models;
 using TestShop.Repositories;
 
 namespace TestShop.Areas.Admin.Controllers
@@ -21,7 +22,6 @@ namespace TestShop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var categories = unitOfWork.Categories.GetAll();
-            var list = categories.ToList();
             return View(categories);
         }
 

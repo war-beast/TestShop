@@ -37,17 +37,8 @@ namespace TestShop.Areas.Admin.Controllers
 
         private async Task InitializeAdminAsync()
         {
-            using (var context = new ApplicationDbContext())
-            {
-                ApplicationUser admin = new ApplicationUser { Email = "test@shop.ru", PhoneNumber = "+79051111111", UserName = "test@shop.ru" };
-                IdentityResult result = await UserManager.CreateAsync(admin, "123456");
-
-                if (!result.Succeeded)
-                {
-                    string s = "";
-                }
-                //await context.SaveChangesAsync();
-            }
+            ApplicationUser admin = new ApplicationUser { Email = "test@shop.ru", PhoneNumber = "+79051111111", UserName = "test@shop.ru" };
+            IdentityResult result = await UserManager.CreateAsync(admin, "123456"); //result тут нужен торлько для отладки, так как регистрация админа - это разовая акция и не видна на клиенте.
         }
     }
 }

@@ -1,31 +1,47 @@
-﻿@model IEnumerable<TestShop.Models.Category>
+﻿@model TestShop.Areas.Admin.Models.ProductListViewModel
 
 @{
-    ViewBag.Title = "Категории товаров";
+    ViewBag.Title = "Товары в категории: ";
 }
-
 <section class="dashboard-counts section-padding charts">
     <div class="container-fluid">
         <p>
-            <a href="/Admin/Category/Create" class="btn btn-primary">Добавить</a>
+            <a href="/Admin/Product/Create" class="btn btn-primary">Добавить</a>
+        </p>
+        <p>
+            <h2>Категория: @Model.CategoryName</h2>
         </p>
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    Наименование
                 </th>
-                <th>Количество товаров</th>
+                <th>
+                    Цена
+                </th>
+                <th>
+                    Рейтинг
+                </th>
+                <th>
+                    Фото
+                </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model?.Products)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @item.Products.Count (<a href="/Admin/Product/Index/@item.Id">открыть список</a>)
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Photo)
                     </td>
                     <td>
                         @Html.ActionLink("Изменить", "Edit", new { id = item.Id }, new { @class = "dialog", @title = "Изменить" }) |
