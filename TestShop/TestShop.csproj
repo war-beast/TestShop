@@ -324,6 +324,7 @@
     <Content Include="Areas\Admin\Views\Category\_Create.cshtml" />
     <Content Include="Areas\Admin\Views\Category\_Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Category\_Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

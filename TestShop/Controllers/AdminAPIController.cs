@@ -55,6 +55,23 @@ namespace TestShop.Controllers
             return Ok(retVal);
         }
 
+        [HttpPost]
+        [Route("CreateProduct")]
+        public async Task<IHttpActionResult> CreateProduct([FromBody] Product product)
+        {
+            string retVal = "ok";
+
+            if (!ModelState.IsValid)
+                return BadRequest("Ошибка при заполнении полей формы.");
+
+            await Task.Run(() => {
+                unitOfWork.Products.Create(product);
+                unitOfWork.Save();
+            });
+
+            return Ok(retVal);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

@@ -41,6 +41,47 @@ namespace TestShop.Areas.Admin.Controllers
             return PartialView("_Details", product);
         }
 
+        public ActionResult Create(int? id)
+        {
+            int identity = 0;
+            if (id.HasValue)
+                identity = id.Value;
+
+            var category = unitOfWork.Categories.Get(identity);
+            var newProduct = new Product { CategoryId = category.Id };
+            return PartialView("_Create", newProduct);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            int identity = 0;
+            if (id.HasValue)
+                identity = id.Value;
+
+            var product = unitOfWork.Products.Get(identity);
+            return PartialView("_Edit", product);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            int identity = 0;
+            if (id.HasValue)
+                identity = id.Value;
+
+            var product = unitOfWork.Products.Get(identity);
+            return PartialView("_Delete", product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public ActionResult DeleteRecord(Product product)
+        {
+            unitOfWork.Products.Delete(product.Id);
+            unitOfWork.Save();
+            return RedirectToAction("Index", new { Id = product.CategoryId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
