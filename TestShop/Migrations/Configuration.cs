@@ -9,7 +9,7 @@ namespace TestShop.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "TestShop.Models.DataContext";
         }
 

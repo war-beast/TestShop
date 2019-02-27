@@ -7,7 +7,7 @@
 <section class="dashboard-counts section-padding charts">
     <div class="container-fluid">
         <p>
-            <a href="/Admin/Category/Create" class="btn btn-primary">Добавить</a>
+            <a href="/Admin/Category/Create" class="btn btn-primary dialog" title="Новая категория">Добавить</a>
         </p>
         <table class="table">
             <tr>
@@ -29,7 +29,6 @@
                     </td>
                     <td>
                         @Html.ActionLink("Изменить", "Edit", new { id = item.Id }, new { @class = "dialog", @title = "Изменить" }) |
-                        @Html.ActionLink("Сведения", "Details", new { id = item.Id }, new { @class = "dialog", @title = "Сведения" }) |
                         @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "dialog", @title = "Удалить" })
                     </td>
                 </tr>

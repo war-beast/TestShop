@@ -7,6 +7,7 @@ namespace TestShop.Models
     {
         public int Id { get; set; }
         [Display(Name = "Наименование")]
+        [Required]
         public string Name { get; set; }
         public ICollection<Product> Products { get; set; }
     }
