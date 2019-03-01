@@ -26,6 +26,10 @@ namespace TestShop.Models
         [Display(Name = "Фото")]
         public string Photo { get; set; }
 
+        [Required]
+        [Display(Name = "Описание")]
+        public string Description { get; set; }
+
         public ICollection<Order> Orders { get; set; }
     }
 }

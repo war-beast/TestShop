@@ -35,7 +35,7 @@ namespace TestShop.Repositories
 
         public Product Get(int id)
         {
-            return db.Products.Find(id);
+            return db.Products.FirstOrDefault(pr => pr.Id == id);
         }
 
         public IEnumerable<Product> GetAll()
