@@ -41,7 +41,7 @@
             var tokenKey = "tokenInfo";
             $('#login').click(function (e) {
                 var initialInner = $("#login").html();
-                $("#login").html("<img src='/Secure/Img/loader.gif' />");
+                $("#login").html("<img src='/Areas/Admin/Img/loader.gif' />");
                 e.preventDefault();
                 var loginData = {
                     grant_type: 'password',
@@ -57,6 +57,7 @@
                     if (data.responseJSON.error === undefined) {
                         localStorage.setItem(tokenKey, data.responseJSON.access_token);
                         $("#submitLogin").html(initialInner);
+                        location.replace("/Admin/Category");
                     }
                     else {
                         $("#errMessage").html(data.responseJSON.error_description);

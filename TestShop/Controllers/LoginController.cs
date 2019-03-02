@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TestShop.Models;
 
-namespace TestShop.Areas.Admin.Controllers
+namespace TestShop.Controllers
 {
     public class LoginController : AsyncController
     {
@@ -28,9 +28,14 @@ namespace TestShop.Areas.Admin.Controllers
         // GET: Admin/Login
         public async Task<ActionResult> Index()
         {
+            if (Request.IsAuthenticated)
+                return RedirectToAction("Index", "Category");
+
             var admin = await UserManager.FindByNameAsync("test@shop.ru");
             if (admin == null)
                 await InitializeAdminAsync();
+
+            ViewBag.Title = "Вход";
 
             return View();
         }

@@ -27,7 +27,7 @@ namespace TestShop.Models
             {
                 db.Categories.Add(new Category {
                     Name = "Смартфоны", Products = new List<Product> {
-                        new Product { Name = "Samsung Galaxy A7", Price = 600, Rating = 1, Photo = "/Photo/30042525m.jpg", Description = "Описание товара." },
+                        new Product { Name = "Samsung Galaxy A7", Price = 600.6M, Rating = 1, Photo = "/Photo/30042525m.jpg", Description = "Описание товара." },
                         new Product { Name = "Huawei P20 Lite", Price = 660, Rating = 3, Photo = "/Photo/30042521m.jpg", Description = "Описание товара." },
                         new Product { Name = "Apple iPhone XS Max", Price = 900, Rating = 5, Photo = "/Photo/30040019m.jpg", Description = "Описание товара." }
                     }
@@ -35,7 +35,7 @@ namespace TestShop.Models
                 db.Categories.Add(new Category {
                     Name = "Компьютеры", Products = new List<Product> {
                         new Product { Name = "Apple MacBook 12 Core M3", Price = 1000, Rating = 3, Photo = "/Photo/30028509m.jpg", Description = "Описание товара." },
-                        new Product { Name = "Irbis NB211", Price = 630, Rating = 2, Photo = "/Photo/30028509m.jpg", Description = "Описание товара." }
+                        new Product { Name = "Irbis NB211", Price = 630.35M, Rating = 2, Photo = "/Photo/30028509m.jpg", Description = "Описание товара." }
                     }
                 });
                 db.Categories.Add(new Category {
