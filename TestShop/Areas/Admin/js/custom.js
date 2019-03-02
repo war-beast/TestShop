@@ -17,4 +17,34 @@
         $("#contentDialog .modal-body").load($(this).attr("href"));
         $("#contentDialog").modal("show");
     });
+
+    $(".logout").click(function (e) {
+        e.preventDefault();
+        Logout();
+    });
+
+    function Logout() {
+        var tokenKey = "tokenInfo";
+        var initialInner = $("#login").html();
+        $(".logout").html("<img src='/Areas/Admin/Img/loader.gif' />");
+
+        $.ajax({
+            type: 'GET',
+            url: '/api/Account/Logout',
+            beforeSend: function (xhr) {
+                var token = localStorage.getItem(tokenKey);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            complete: function (data) {
+                if (data.responseText === "") {
+                    localStorage.removeItem(tokenKey);
+                    $(".logout").html(initialInner);
+                    location.reload();
+                }
+                else {
+                    alert(data.responseText);
+                }
+            }
+        });
+    }
 });

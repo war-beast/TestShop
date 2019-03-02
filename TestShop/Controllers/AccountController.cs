@@ -68,6 +68,7 @@ namespace TestShop.Controllers
 
         // POST api/Account/Logout
         [Route("Logout")]
+        [HttpGet]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);

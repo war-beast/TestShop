@@ -29,7 +29,7 @@ namespace TestShop.Controllers
         public async Task<ActionResult> Index()
         {
             if (Request.IsAuthenticated)
-                return RedirectToAction("Index", "Category");
+                return RedirectToAction("Index", "Profile");
 
             var admin = await UserManager.FindByNameAsync("test@shop.ru");
             if (admin == null)
