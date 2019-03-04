@@ -1,34 +1,32 @@
 ﻿@{
                 /**/
 
-                ViewBag.Title = "Index";
-                Layout = "~/Areas/Admin/Views/Shared/_ClearLayout.cshtml";
+                ViewBag.Title = "Вход";
 }
 
 <div class="page login-page">
     <div class="container">
-        <div class="form-outer text-center d-flex align-items-center">
-            <div class="form-inner">
-                <div class="logo text-uppercase"><span>Dash</span><strong class="text-primary">Express</strong></div>
-                <p>Вход в панель управления.</p>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <p>Вход в личный кабинет.</p>
                 <form id="login-form" method="post">
                     <div class="form-group">
-                        <label for="username" class="label-custom">Email</label>
-                        <input id="username" type="text" name="loginUsername" required="">
+                        <label for="username" class="label-custom">Email</label><br />
+                        <input id="username" type="text" name="loginUsername" required="" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="password" class="label-custom">Пароль</label>
-                        <input id="password" type="password" name="loginPassword" required="">
-                    </div><a id="login" href="#" class="btn btn-primary">Войти</a>
+                        <label for="password" class="label-custom">Пароль</label><br />
+                        <input id="password" type="password" name="loginPassword" required="" class="form-control">
+                    </div>
+                    <a id="login" href="#" class="btn btn-primary">Войти</a>
                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                 </form>
+                <div class="pull-right">
+                    <a href="/Login/Registration">Зарегистрироваться</a>
+                </div>
                 <div>
                     <span id="errMessage"></span>
                 </div>
-            </div>
-            <div class="copyrights text-center">
-                <p>Design by <a href="https://bootstrapious.com" class="external">Bootstrapious</a></p>
-                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
             </div>
         </div>
     </div>
@@ -41,7 +39,7 @@
             var tokenKey = "tokenInfo";
             $('#login').click(function (e) {
                 var initialInner = $("#login").html();
-                $("#login").html("<img src='/Areas/Admin/Img/loader.gif' />");
+                $("#login").html("<img src='/Img/loader.gif' />");
                 e.preventDefault();
                 var loginData = {
                     grant_type: 'password',

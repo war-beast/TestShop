@@ -279,9 +279,22 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\nouislider.min.css" />
+    <Content Include="Content\slick-theme.css" />
+    <Content Include="Content\slick.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\slick.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Img\hotdeal.png" />
+    <Content Include="Img\loader.gif" />
+    <Content Include="Img\logo.png" />
+    <Content Include="Img\shop01.png" />
+    <Content Include="Img\shop02.png" />
+    <Content Include="Img\shop03.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -327,6 +340,14 @@
     <Content Include="Areas\Admin\Views\Product\_Create.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Product\_Delete.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\slick.eot" />
+    <Content Include="fonts\slick.ttf" />
+    <Content Include="fonts\slick.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -337,8 +358,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.zoom.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\nouislider.min.js" />
+    <Content Include="Scripts\slick.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -347,7 +371,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -355,10 +378,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\_CatList.cshtml" />
+    <Content Include="Views\Shared\_CatNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Img\" />
     <Folder Include="Photo\" />
   </ItemGroup>
   <ItemGroup>

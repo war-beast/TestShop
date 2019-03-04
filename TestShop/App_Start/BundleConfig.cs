@@ -13,18 +13,25 @@ namespace TestShop
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+            //           "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/site.js"));
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                      "~/Scripts/slick.min.js", 
+                      "~/Scripts/nouislider.min.js", 
+                      "~/Scripts/jquery.zoom.min.js", 
+                      "~/Scripts/main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/slick.css",
+                      "~/Content/slick-theme.css",
+                      "~/Content/nouislider.min.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/style.css"));
         }
     }
 }
