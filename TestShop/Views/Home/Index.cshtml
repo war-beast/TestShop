@@ -71,48 +71,7 @@
                 <!-- /store top filter -->
                 <!-- store products -->
                 <div class="row" id="productList">
-                    @foreach (var category in Model)
-                    {
-                        foreach (var product in category.Products)
-                        {
-                            <!-- product -->
-                            <div class="col-sm-4 col-xs-6">
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="@product.Photo" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">@category.Name</p>
-                                        <h3 class="product-name"><a href="#">@product.Name</a></h3>
-                                        <h4 class="product-price">
-                                            @product.Price ₽ <del class="product-old-price">
-                                                @{
-                                                    var dif = product.Price * 1.1M;
-                                                    @dif;
-                                                } ₽
-                                            </del>
-                                        </h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">добавить в список желаний</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">добавить в сравнения</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">предпросмотр</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> добавить в корзину</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /product -->
-                        }
-                    }
+                    @{ Html.RenderAction("SortedProducts", "Home"); }
                 </div>
                 <!-- /store products -->
             </div>
@@ -155,13 +114,14 @@
                     dataType: 'json',
                     contentType: "application/json;charset=utf-8",
                     cache: false,
-                    url: '/Home/SortTable',
+                    url: '/Home/SortedProducts',
                     data: JSON.stringify(filter)
                 }).done(function (data) {
                     $("#productList").html(data.responseText);
-                }).fail(function (data) {
-                    var dd = data.responseText;
-                    $("#productList").html(data.responseText);
+                    }).fail(function (data) {
+                        if (data.status === 200) {
+                            $("#productList").html(data.responseText);
+                        }
                 });
             }
         });

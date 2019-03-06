@@ -45,8 +45,14 @@ namespace TestShop.Controllers
             return PartialView("_CatNavigation", categories);
         }
 
+        public ActionResult SortedProducts()
+        {
+            var productList = unitOfWork.Products.GetAll();
+            return PartialView("_ProductList", productList);
+        }
+
         [HttpPost]
-        public ActionResult SortTable(FilterViewModels filter)
+        public ActionResult SortedProducts(FilterViewModels filter)
         {
             var productList = unitOfWork.Products.Find(pr => pr.Price >= filter.MinPrice && pr.Price <= filter.MaxPrice);
             switch (filter.Sort)

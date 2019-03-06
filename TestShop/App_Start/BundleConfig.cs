@@ -26,7 +26,7 @@ namespace TestShop
                       "~/Scripts/main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/slick.css",
                       "~/Content/slick-theme.css",
                       "~/Content/nouislider.min.css",
