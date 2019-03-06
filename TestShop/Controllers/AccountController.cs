@@ -326,7 +326,10 @@ namespace TestShop.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                string retVal = "";
+                foreach (var error in ModelState.Values)
+                    retVal += error.Errors[0].ErrorMessage + "<br />";
+                return BadRequest(retVal);
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
@@ -335,7 +338,10 @@ namespace TestShop.Controllers
 
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                string retVal = "";
+                foreach (var error in result.Errors)
+                    retVal += error + "<br />";
+                return BadRequest(retVal);
             }
 
             return Ok();

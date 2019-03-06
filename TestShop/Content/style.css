@@ -1036,19 +1036,20 @@ textarea.input {
   transform: translateY(100%);
 }
 
-.product .add-to-cart .add-to-cart-btn {
-  position: relative;
-  border: 2px solid transparent;
-  height: 40px;
-  padding: 0 30px;
-  background-color: #ef233c;
-  color: #FFF;
-  text-transform: uppercase;
-  font-weight: 700;
-  border-radius: 40px;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
-}
+    .product .add-to-cart .add-to-cart-btn {
+        position: relative;
+        border: 2px solid transparent;
+        /*height: 40px;*/
+        padding: 0 15px;
+        background-color: #ef233c;
+        color: #FFF;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 40px;
+        -webkit-transition: 0.2s all;
+        transition: 0.2s all;
+        font-size: calc(1vw + 0.2rem);
+    }
 
 .product .add-to-cart .add-to-cart-btn>i {
   position: absolute;
@@ -2132,10 +2133,21 @@ textarea.input {
 }
 
 /*=========================================================
+	12.1 -> ACCOUNT
+===========================================================*/
+#errMessage {
+    color: #D10024;
+}
+
+#productList .col-sm-4 {
+    min-width: 260px;
+}
+
+/*=========================================================
 	13 -> RESPONSIVE
 ===========================================================*/
-
-@media only screen and (max-width: 1201px) {}
+@media only screen and (max-width: 1201px) {
+}
 
 @media only screen and (max-width: 991px) {
   #top-header .header-links.pull-left {

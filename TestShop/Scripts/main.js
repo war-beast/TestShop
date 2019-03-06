@@ -125,16 +125,20 @@
         });
     });
 
-    //var priceInputMax = document.getElementById('price-max'),
-    //    priceInputMin = document.getElementById('price-min');
+    var priceInputMax = document.getElementById('price-max'),
+        priceInputMin = document.getElementById('price-min');
 
-    //priceInputMax.addEventListener('change', function () {
-    //    updatePriceSlider($(this).parent(), this.value);
-    //});
+    if (priceInputMax) {
+        priceInputMax.addEventListener('change', function () {
+            updatePriceSlider($(this).parent(), this.value);
+        });
+    }
 
-    //priceInputMin.addEventListener('change', function () {
-    //    updatePriceSlider($(this).parent(), this.value);
-    //});
+    if (priceInputMin) {
+        priceInputMin.addEventListener('change', function () {
+            updatePriceSlider($(this).parent(), this.value);
+        });
+    }
 
     function updatePriceSlider(elem, value) {
         if (elem.hasClass('price-min')) {
@@ -150,12 +154,12 @@
     var priceSlider = document.getElementById('price-slider');
     if (priceSlider) {
         noUiSlider.create(priceSlider, {
-            start: [1, 999],
+            start: [1, 99999],
             connect: true,
             step: 1,
             range: {
                 'min': 1,
-                'max': 999
+                'max': 99999
             }
         });
 

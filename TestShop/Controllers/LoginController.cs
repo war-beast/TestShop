@@ -35,7 +35,13 @@ namespace TestShop.Controllers
             if (admin == null)
                 await InitializeAdminAsync();
 
-            ViewBag.Title = "Вход";
+            return View();
+        }
+
+        public ActionResult Registration()
+        {
+            if (Request.IsAuthenticated)
+                return RedirectToAction("Index", "Profile");
 
             return View();
         }

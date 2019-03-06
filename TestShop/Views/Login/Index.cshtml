@@ -1,7 +1,7 @@
 ﻿@{
-                /**/
+    /**/
 
-                ViewBag.Title = "Вход";
+    ViewBag.Title = "Вход";
 }
 
 <div class="page login-page">
@@ -18,14 +18,14 @@
                         <label for="password" class="label-custom">Пароль</label><br />
                         <input id="password" type="password" name="loginPassword" required="" class="form-control">
                     </div>
-                    <a id="login" href="#" class="btn btn-primary">Войти</a>
+                    <button id="login" href="#" class="primary-btn order-submit">Войти</button>
                     <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                 </form>
+                <div class="row">
+                    <span id="errMessage"></span>
+                </div>
                 <div class="pull-right">
                     <a href="/Login/Registration">Зарегистрироваться</a>
-                </div>
-                <div>
-                    <span id="errMessage"></span>
                 </div>
             </div>
         </div>
@@ -51,15 +51,13 @@
                     type: 'POST',
                     url: '/Token',
                     data: loginData
-                }).complete(function (data) {
-                    if (data.responseJSON.error === undefined) {
-                        localStorage.setItem(tokenKey, data.responseJSON.access_token);
-                        $("#submitLogin").html(initialInner);
-                        location.replace("/Admin/Category");
-                    }
-                    else {
-                        $("#errMessage").html(data.responseJSON.error_description);
-                    }
+                }).done(function (data) {
+                    localStorage.setItem(tokenKey, data.access_token);
+                    $("#login").html(initialInner);
+                    location.reload();
+                }).fail(function (data) {
+                    $("#errMessage").html(data.responseJSON.error_description);
+                    $("#login").html(initialInner);
                 });
             });
         });
