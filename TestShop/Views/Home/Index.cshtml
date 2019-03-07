@@ -20,7 +20,7 @@
                         @foreach (var item in @Model)
                         {
                             <div class="input-checkbox">
-                                <input type="checkbox" id="category-@item.Id" name="filter">
+                                <input type="checkbox" id="category-@item.Id" name="filter" data-name="@item.Name">
                                 <label for="category-@item.Id">
                                     <span></span>
                                     @item.Name
@@ -87,13 +87,20 @@
     <script>
         $(document).ready(function () {
             $("#filter").click(function () {
+                FormFilter();
+            });
+
+            $("#sortType").on("change", function () {
+                FormFilter();
+            });
+
+            function FormFilter() {
                 var category = function () { };
-                var catList = $(".checkbox-filter input[name='filter']");
                 var selected = new Array();
-                $.each(catList, function () {
+                $(".checkbox-filter input[name='filter']:checked").each(function () {
                     var cat = new category();
-                    var input = $(this);
                     cat.Id = $(this).attr("id").replace("category-", "");
+                    cat.Name = $(this).data("name");
                     selected.push(cat);
                 });
 
@@ -105,7 +112,7 @@
                 }
 
                 ReloadList(filter);
-            });
+            }
 
             function ReloadList(filter) {
                 $.ajax({

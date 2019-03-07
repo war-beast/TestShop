@@ -912,10 +912,11 @@ textarea.input {
   color: #8D99AE;
 }
 
-.product .product-body .product-name {
-  text-transform: uppercase;
-  font-size: 14px;
-}
+    .product .product-body .product-name {
+        text-transform: uppercase;
+        font-size: 14px;
+        height: 4rem;
+    }
 
 .product .product-body .product-name>a {
   font-weight: 700;

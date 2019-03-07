@@ -54,7 +54,18 @@ namespace TestShop.Controllers
         [HttpPost]
         public ActionResult SortedProducts(FilterViewModels filter)
         {
-            var productList = unitOfWork.Products.Find(pr => pr.Price >= filter.MinPrice && pr.Price <= filter.MaxPrice);
+            IEnumerable<Product> productList = new List<Product>();
+            var allProducts = unitOfWork.Products.GetAll();
+
+            foreach (var category in filter.Categories)
+            {
+                var query = allProducts.Where(prod => prod.Price >= filter.MinPrice && prod.Price <= filter.MaxPrice && prod.CategoryId == category.Id);
+                productList = productList.Concat(query);
+                var list = new List<Product>();
+                list.AddRange(productList);
+            }
+
+
             switch (filter.Sort)
             {
                 case 1:

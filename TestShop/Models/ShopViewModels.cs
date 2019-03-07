@@ -13,6 +13,7 @@ namespace TestShop.Models
 
     public class FilterViewModels
     {
+        public List<Parametr> Categories { get; set; }
         public decimal MinPrice { get; set; }
         public decimal MaxPrice { get; set; }
         public int Sort { get; set; }
