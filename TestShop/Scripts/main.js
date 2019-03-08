@@ -1,4 +1,4 @@
-(function ($) {
+$(document).ready(function() {
     "use strict";
 
     // Mobile Nav toggle
@@ -101,29 +101,7 @@
     }
 
     /////////////////////////////////////////
-
-    // Input number
-    $('.input-number').each(function () {
-        var $this = $(this),
-            $input = $this.find('input[type="number"]'),
-            up = $this.find('.qty-up'),
-            down = $this.find('.qty-down');
-
-        down.on('click', function () {
-            var value = parseInt($input.val()) - 1;
-            value = value < 1 ? 1 : value;
-            $input.val(value);
-            $input.change();
-            updatePriceSlider($this, value);
-        });
-
-        up.on('click', function () {
-            var value = parseInt($input.val()) + 1;
-            $input.val(value);
-            $input.change();
-            updatePriceSlider($this, value);
-        });
-    });
+    InitaializeUpDown();
 
     var priceInputMax = document.getElementById('price-max'),
         priceInputMin = document.getElementById('price-min');
@@ -168,10 +146,19 @@
             handle ? priceInputMax.value = value : priceInputMin.value = value;
         });
     }
+    /*--Конец функций шаблона--*/
+    Storage.prototype.setObject = function (key, value) {
+        this.setItem(key, JSON.stringify(value));
+    };
 
-})(jQuery);
+    Storage.prototype.getObject = function (key) {
+        var value = this.getItem(key);
+        return value && JSON.parse(value);
+    };
 
-$(document).ready(function () {
+    var productArray = localStorage.getObject("shoping-card") === null ? new Array() : localStorage.getObject("shoping-card");
+    $("#shopingItemsCount").html(productArray.length);
+
     $(".logout").click(function (e) {
         e.preventDefault();
         Logout();
@@ -202,3 +189,53 @@ $(document).ready(function () {
         });
     }
 });
+
+function InitaializeUpDown() {
+    // Input number
+    $('.input-number').each(function () {
+        var $this = $(this),
+            $input = $this.find('input[type="number"]'),
+            up = $this.find('.qty-up'),
+            down = $this.find('.qty-down');
+
+        down.on('click', function () {
+            var value = parseInt($input.val()) - 1;
+            value = value < 1 ? 1 : value;
+            $input.val(value);
+            $input.change();
+            updatePriceSlider($this, value);
+        });
+
+        up.on('click', function () {
+            var value = parseInt($input.val()) + 1;
+            $input.val(value);
+            $input.change();
+            updatePriceSlider($this, value);
+        });
+    });
+}
+
+function updatePriceSlider(elem, value) {
+    if (elem.hasClass('price-min')) {
+        console.log('min');
+        priceSlider.noUiSlider.set([value, null]);
+    } else if (elem.hasClass('price-max')) {
+        console.log('max');
+        priceSlider.noUiSlider.set([null, value]);
+    }
+}
+
+function ResetBuyButtons() {
+    $(".add-to-cart-btn").click(function () {
+        var selectedProduct = {
+            Id: $(this).data("prodict-id"),
+            Name: $(this).data("product-name"),
+            Count: 1,
+            Price: $(this).data("product-prict")
+        };
+        var productArray = localStorage.getObject("shoping-card") === null ? new Array() : localStorage.getObject("shoping-card");
+        productArray.push(selectedProduct);
+        localStorage.setObject("shoping-card", productArray);
+        $("#shopingItemsCount").html(productArray.length);
+    });
+}

@@ -24,7 +24,8 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>&nbsp;
+                    <i>(@Html.Raw(product.Rating))</i>
                 </div>
                 <div class="product-btns">
                     <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">добавить в список желаний</span></button>
@@ -33,7 +34,7 @@
                 </div>
             </div>
             <div class="add-to-cart">
-                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> добавить в корзину</button>
+                <button class="add-to-cart-btn" data-prodict-id="@product.Id" data-product-name="@product.Name" data-product-prict="@product.Price"><i class="fa fa-shopping-cart"></i> добавить в корзину</button>
             </div>
         </div>
     </div>

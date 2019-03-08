@@ -11,6 +11,14 @@ namespace TestShop.Models
         public string Name { get; set; }
     }
 
+    public class ShopingCardItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Count { get; set; }
+        public decimal Price { get; set; }
+    }
+
     public class FilterViewModels
     {
         public List<Parametr> Categories { get; set; }

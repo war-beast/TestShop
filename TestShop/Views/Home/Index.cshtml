@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TestShop.Models.Category>
 
 @{
-
+    ViewBag.Title = "Интернет-магазин.";
 }
 
 <!-- SECTION -->
@@ -20,7 +20,7 @@
                         @foreach (var item in @Model)
                         {
                             <div class="input-checkbox">
-                                <input type="checkbox" id="category-@item.Id" name="filter" data-name="@item.Name">
+                                <input type="checkbox" name="filter" id="category-@item.Id" data-name="@item.Name" data-id="@item.Id" checked>
                                 <label for="category-@item.Id">
                                     <span></span>
                                     @item.Name
@@ -87,19 +87,21 @@
     <script>
         $(document).ready(function () {
             $("#filter").click(function () {
-                FormFilter();
+                CreateFilter();
             });
 
             $("#sortType").on("change", function () {
-                FormFilter();
+                CreateFilter();
             });
 
-            function FormFilter() {
+            ResetBuyButtons();
+
+            function CreateFilter() {
                 var category = function () { };
                 var selected = new Array();
                 $(".checkbox-filter input[name='filter']:checked").each(function () {
                     var cat = new category();
-                    cat.Id = $(this).attr("id").replace("category-", "");
+                    cat.Id = $(this).data("id");
                     cat.Name = $(this).data("name");
                     selected.push(cat);
                 });
@@ -122,13 +124,16 @@
                     contentType: "application/json;charset=utf-8",
                     cache: false,
                     url: '/Home/SortedProducts',
-                    data: JSON.stringify(filter)
-                }).done(function (data) {
-                    $("#productList").html(data.responseText);
-                    }).fail(function (data) {
+                    data: JSON.stringify(filter),
+                    complete: function (data) {
                         if (data.status === 200) {
                             $("#productList").html(data.responseText);
+                            ResetBuyButtons();
                         }
+                        else {
+                            $("#productList").html("Не удалось загрузить. ");
+                        }
+                    }
                 });
             }
         });

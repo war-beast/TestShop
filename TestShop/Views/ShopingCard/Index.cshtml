@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Корзина.";
+}
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container-fluid">
+        <!-- row -->
+        <div class="row">
+            <!-- Order Details -->
+            <div class="col-md-12 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Ваш заказ</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="row">
+                        <div class="col-sm-5"><strong>ТОВАР</strong></div>
+                        <div class="col-sm-5"><strong>КОЛИЧЕСТВО</strong></div>
+                        <div class="col-sm-2"><strong>ЦЕНА</strong></div>
+                    </div>
+                    <div class="order-products">
+                        <div id="productsInCard" class="container-fluid">
+                            <p>Список загружается <img src="~/Img/loader.gif" /></p>
+                        </div>
+                        </div>
+                        <div class="order-col">
+                            <div><strong>ИТОГО</strong></div>
+                            <div><strong class="order-total"></strong></div>
+                        </div>
+                    </div>
+                <h3 class="title">Доставка</h3>
+                <div class="shiping-details">
+                    <div class="input-radio">
+                        <input type="radio" name="shiping" data-id="1" id="shiping-1">
+                        <label for="shiping-1">
+                            <span></span>
+                            Самовывоз
+                        </label>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="shiping" data-id="2" id="shiping-2">
+                        <label for="shiping-2">
+                            <span></span>
+                            Доставка
+                        </label>
+                        <div class="caption">
+                            <p>
+                                <div class="form-group">
+                                    <label for="adress" class="label-custom">Введите адрес доставки:</label><br />
+                                    <textarea id="adress" type="text" name="adress" class="form-control"></textarea>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @if (!Request.IsAuthenticated)
+                {
+                    <p>Чтобы сделать заказ, <a href="/Login">войдите в свой аккаунт</a>. Если у вас нет аккаунта, <a href="/Login/Registration">зарегистрируйтесь</a>.</p>
+                }
+                else
+                {
+                    <a href="#" class="primary-btn order-submit">Заказать</a>
+                }
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var productArray = localStorage.getObject("shoping-card") === null ? new Array() : localStorage.getObject("shoping-card");
+            var totalSum = 0;
+            if (productArray.length > 0)
+                $("#productsInCard").html("");
+            $.each(productArray, function () {
+                var prod = $(this)[0];
+                var it = GetItemBlock(prod);
+                $("#productsInCard").append(it);
+                totalSum += prod.Price * prod.Count;
+            });
+
+            $(".order-total").html(totalSum);
+            InitaializeUpDown();
+
+            function GetItemBlock(item) {
+                return "<div class='row mb-1'><div class='col-sm-5'>" + item.Name + "</div><div class='input-number col-sm-5'><input id='quant-" + item.Id + "' type='number' class='order-items' value='1' /><span class='qty-up' data-id='" + item.Id + "'>+</span><span class='qty-down' data-id='1" + item.Id + "'>-</span></div><div class='col-sm-2'><span id='sum-" + item.Id + "'>" + item.Price + "</span>&nbsp;₽</div></div>";
+            }
+        });
+    </script>
+    }

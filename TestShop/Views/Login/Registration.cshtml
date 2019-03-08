@@ -1,7 +1,6 @@
 ﻿@{
-                /**/
-
-                ViewBag.Title = "Регистрация нового пользователя.";
+    /**/
+    ViewBag.Title = "Регистрация нового пользователя.";
 }
 
 <div class="page login-page">
@@ -56,11 +55,11 @@
                     localStorage.setItem(tokenKey, data.access_token);
                     $("#register").html(initialInner);
                     location.replace("/Login");
-                    }).fail(function (data) {
-                        if (data.responseJSON.Message !== "")
-                            $("#errMessage").html(data.responseJSON.Message);
-                        else
-                            $("#errMessage").html(data.responseJSON.error_description);
+                }).fail(function (data) {
+                    if (data.responseJSON.Message !== "")
+                        $("#errMessage").html(data.responseJSON.Message);
+                    else
+                        $("#errMessage").html(data.responseJSON.error_description);
                     $("#register").html(initialInner);
                 });
             });

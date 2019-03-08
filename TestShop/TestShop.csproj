@@ -221,6 +221,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ShopingCardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -384,11 +385,11 @@
     <Content Include="Views\Login\Registration.cshtml" />
     <Content Include="Views\Home\_SortingList.cshtml" />
     <Content Include="Views\Home\_ProductList.cshtml" />
+    <Content Include="Views\ShopingCard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Photo\" />
-    <Folder Include="Views\CommonAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
