@@ -16,7 +16,7 @@
             <div class="input-group-addon">
                 <div class="input-group-text">₽</div>
             </div>
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", type = "number", min = "0", step = "0.01" } })
+            <input class="form-control" type="number" min="0" step="0.01" id="Price" name="Price" data-value="@Model.Price"  />
         </div>
     </div>
 
@@ -53,6 +53,9 @@
 <script>
     $(document).ready(function () {
         $("#submit").click(function () { EditProduct(); });
+
+        var price = $("#Price").data("value");
+        $("#Price").val(price.replace(",", "."));
 
         function EditProduct() {
             var tokenKey = "tokenInfo";

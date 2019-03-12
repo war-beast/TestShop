@@ -12,6 +12,8 @@ namespace TestShop.Repositories
         private DataContext db = new DataContext();
         private CategoryRepository _categoryRepository;
         private ProductRepository _productRepository;
+        private CustomerRepository _customer;
+        private OrderRepository _orderRepository;
 
         public CategoryRepository Categories
         {
@@ -30,6 +32,26 @@ namespace TestShop.Repositories
                 if (_productRepository == null)
                     _productRepository = new ProductRepository(db);
                 return _productRepository;
+            }
+        }
+
+        public CustomerRepository Customer
+        {
+            get
+            {
+                if (_customer == null)
+                    _customer = new CustomerRepository(db);
+                return _customer;
+            }
+        }
+
+        public OrderRepository Order
+        {
+            get
+            {
+                if (_orderRepository == null)
+                    _orderRepository = new OrderRepository(db);
+                return _orderRepository;
             }
         }
 
