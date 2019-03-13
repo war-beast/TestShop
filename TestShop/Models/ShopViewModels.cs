@@ -5,22 +5,6 @@ using System.Web;
 
 namespace TestShop.Models
 {
-    public class OrderState : List<String>
-    {
-        private readonly int AvailableStateCount = 3;
-        public static List<String> StateList { get; set; }
-
-        public OrderState()
-        {
-            StateList = new List<string>(AvailableStateCount);
-            StateList.Add("В обработке");
-            StateList.Add("Выставлен счёт");
-            StateList.Add("Счёт оплачен");
-            StateList.Add("Товар отправлен покупателю");
-            StateList.Add("Товар доставлен по адресу");
-        }
-    }
-
     public class Parametr
     {
         public int Id { get; set; }

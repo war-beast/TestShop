@@ -88,7 +88,7 @@
                     var prod = $(this)[0];
                     var it = GetItemBlock(prod);
                     $("#productsInCard").append(it);
-                    totalSum += prod.Price * prod.Count;
+                    totalSum += parseFloat(prod.Price.replace(",", ".")).toFixed(2) * prod.Count;
                 });
 
                 $(".remove").click(function (e) {
@@ -97,7 +97,7 @@
                     LoadCardUI();
                 });
 
-                $(".order-total").html(totalSum);
+                $(".order-total").html(totalSum + "&nbsp;₽");
                 InitaializeUpDown();
                 InitaializeCountChangin();
             }
@@ -120,6 +120,7 @@
 
                 $(".order-total").html(totalSum);
                 localStorage.setObject("shoping-card", productArray);
+                $("#shopingItemsCount").html(productArray.length);
             }
 
             function InitaializeCountChangin() {
@@ -145,10 +146,10 @@
                     if (item.Id === id) {
                         item.Count = value;
                     }
-                    totalSum += item.Price * item.Count;
+                    totalSum += parseFloat(item.Price.replace(",", ".")).toFixed(2) * item.Count;
                 }
 
-                $(".order-total").html(totalSum);
+                $(".order-total").html(totalSum + "&nbsp;₽");
                 localStorage.setObject("shoping-card", productArray);
             }
 

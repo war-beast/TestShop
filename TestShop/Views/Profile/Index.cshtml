@@ -6,37 +6,61 @@
 <div>
     @if (User.Identity.Name == "test@shop.ru")
     {
-        <a href="~/Admin/Category">Перейти в админку</a>
+        <a href="~/Admin/Order">Перейти в админку</a>
     }
-    <!-- SECTION -->
-    <div class="section">
-        <!-- container -->
-        <div class="container-fluid order-details">
-            <div class="section-title text-center">
-                <h2 class="title">Мои заказы</h2>
-            </div>
-            <div class="order-summary">
-                <div class="row mb-1">
-                    <div class="col-sm-2"><strong>Id</strong></div>
-                    <div class="col-sm-2"><strong>Кол-во товаров</strong></div>
-                    <div class="col-sm-3"><strong>Дата</strong></div>
-                    <div class="col-sm-2"><strong>Статус</strong></div>
-                    <div class="col-sm-1"></div>
-                </div>
-
-                <div class="order-products">
-                    @foreach (var item in Model)
-                    {
-                        <div class="row mb-1">
-                            <div class="col-sm-2">@item.Id</div>
-                            <div class="col-sm-2">@item.OrderItems.Count</div>
-                            <div class="col-sm-4">@item.Date</div>
-                            <div class="col-sm-3">@item.State</div>
-                            <div class="col-sm-1"><a href="#" class="dialog"><i class="fa fa-eye"></i></a></div>
-                        </div>
-                    }
+    else
+    {
+        <!-- SECTION -->
+        <div class="section">
+            <!-- container -->
+            <div class="container-fluid">
+                <div class="row">
+                    Логин: @Html.Raw(User.Identity.Name)
                 </div>
             </div>
         </div>
-    </div>
+        <!-- /SECTION -->
+        <!-- SECTION -->
+        <div class="section">
+            <!-- container -->
+            <div class="order-details">
+                <div class="section-title text-center">
+                    <h2 class="title">Мои заказы</h2>
+                </div>
+                <div class="order-summary">
+                    <div class="order-products">
+                        @foreach (var item in Model)
+                        {
+                            <div class="row mb-2">
+                                <div class="col-sm-3">
+                                    <div class="mb-1"><strong>Id: </strong>@item.Id</div>
+                                    <div class="mb-1"><strong>Дата: </strong>@item.Date</div>
+                                    <div class="mb-1"><strong>Статус: </strong>@item.State</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Товар</th>
+                                                    <th>Кол-во</th>
+                                                </tr>
+                                            </thead>
+                                            @foreach (var product in @item.OrderItems)
+                                            {
+                                                <tr>
+                                                    <td>@product.Product.Name</td>
+                                                    <td>@product.Count</td>
+                                                </tr>
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

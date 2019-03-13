@@ -43,7 +43,24 @@ namespace TestShop.Controllers
                 orders.AddRange(userOrders);
             }
 
+            if(orders.Count > 0)
+            {
+                for(int idx = 0; idx < orders.Count; idx++)
+                {
+                    var order = orders[idx];
+                    FillProductNames(ref order);
+                }
+            }
+
             return View(orders);
+        }
+
+        private void FillProductNames(ref Order order)
+        {
+            foreach(var item in order.OrderItems)
+            {
+                item.Product = unitOfWork.OrderItem.Get(item.Id).Product;
+            }
         }
 
         protected override void Dispose(bool disposing)

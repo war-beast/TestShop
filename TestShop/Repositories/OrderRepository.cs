@@ -39,7 +39,7 @@ namespace TestShop.Repositories
 
         public IEnumerable<Order> GetAll()
         {
-            return db.Orders.Include(cs => cs.Customer);
+            return db.Orders.Include(cs => cs.Customer).Include(cs => cs.OrderItems);
         }
 
         public void Update(Order item)

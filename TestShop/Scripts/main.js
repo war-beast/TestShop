@@ -227,11 +227,12 @@ function updatePriceSlider(elem, value) {
 
 function ResetBuyButtons() {
     $(".add-to-cart-btn").click(function () {
+        var productCount = $("#productCount").val() === undefined ? 1 : $("#productCount").val();
         var selectedProduct = {
             Id: $(this).data("prodict-id"),
             Name: $(this).data("product-name"),
-            Count: 1,
-            Price: $(this).data("product-prict")
+            Count: productCount,
+            Price: $(this).data("product-price")
         };
         var productArray = localStorage.getObject("shoping-card") === null ? new Array() : localStorage.getObject("shoping-card");
         productArray.push(selectedProduct);

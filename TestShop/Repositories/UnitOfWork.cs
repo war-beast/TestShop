@@ -14,6 +14,7 @@ namespace TestShop.Repositories
         private ProductRepository _productRepository;
         private CustomerRepository _customer;
         private OrderRepository _orderRepository;
+        private OrderItemsRepository _orderItemsRepository;
 
         public CategoryRepository Categories
         {
@@ -52,6 +53,16 @@ namespace TestShop.Repositories
                 if (_orderRepository == null)
                     _orderRepository = new OrderRepository(db);
                 return _orderRepository;
+            }
+        }
+
+        public OrderItemsRepository OrderItem
+        {
+            get
+            {
+                if (_orderItemsRepository == null)
+                    _orderItemsRepository = new OrderItemsRepository(db);
+                return _orderItemsRepository;
             }
         }
 

@@ -78,6 +78,20 @@ namespace TestShop.Controllers
             return PartialView("_ProductList", productList);
         }
 
+        public ActionResult Product(int? id)
+        {
+            int identity = 0;
+            if (id.HasValue)
+                identity = id.Value;
+
+            if (identity == 0)
+                return RedirectToAction("Index");
+
+            var product = unitOfWork.Products.Get(identity);
+
+            return View(product);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();

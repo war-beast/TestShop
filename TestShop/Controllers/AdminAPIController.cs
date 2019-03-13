@@ -89,6 +89,25 @@ namespace TestShop.Controllers
             return Ok(retVal);
         }
 
+        [HttpPost]
+        [Route("EditOrderStatus")]
+        public async Task<IHttpActionResult> EditOrderStatus([FromBody] Parametr model)
+        {
+            string retVal = "ok";
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Не выбрано значение статуса.");
+            }
+
+            var order = unitOfWork.Order.Get(model.Id);
+            order.State = model.Name;
+            unitOfWork.Order.Update(order);
+            unitOfWork.Save();
+
+            return Ok(retVal);
+        }
+
         protected override void Dispose(bool disposing)
         {
             unitOfWork.Dispose();
