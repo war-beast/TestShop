@@ -36,6 +36,7 @@
                     }
                     else
                     {
+                        <li><a><i class="fa fa-user-o"></i> @Html.Raw(User.Identity.Name)</a></li>
                         <li><a href="#" class="logout">Выход <i class="fa fa-sign-out"></i></a></li>
                     }
                 </ul>
@@ -123,8 +124,17 @@
                 <!-- NAV -->
                 <ul class="main-nav nav navbar-nav">
                     <li class="active"><a href="~/">Главная</a></li>
+                    <li class="drop">
+                        <a>Категории товаров</a>
+                        <div class="menudrop">
+                            <ul class="container-fluid">
+                                @{Html.RenderAction("CatNavigation", "Home");}
+                            </ul>
+                        </div>
+                    </li>
                     @if (Request.IsAuthenticated)
                     {
+                        <li><a href="/ShopingCard">Корзина</a></li>
                         <li><a href="~/Profile">Личный кабинет</a></li>
                     }
                     @if (User.Identity.Name == "test@shop.ru")
@@ -134,6 +144,7 @@
                         </li>
                     }
                 </ul>
+                <input id="pageName" type="hidden" value="@ViewContext.RouteData.Values["controller"].ToString()" />
                 <!-- /NAV -->
             </div>
             <!-- /responsive-nav -->

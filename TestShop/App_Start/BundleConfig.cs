@@ -17,12 +17,11 @@ namespace TestShop
             //           "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/slick.min.js", 
                       "~/Scripts/nouislider.min.js", 
-                      "~/Scripts/jquery.zoom.min.js", 
                       "~/Scripts/main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

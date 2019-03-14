@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -53,5 +54,20 @@ namespace TestShop.Models
         {
             return SortList.FirstOrDefault(st => st.Id == Id);
         }
+    }
+
+    public class ReviewViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string UserEmail { get; set; }
+        [Required]
+        public string ReviewText { get; set; }
+        [Required]
+        public int Value { get; set; }
+        [Required]
+        public int ProductId { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace TestShop.Controllers
             var user = await UserManager.FindByNameAsync(User.Identity.Name);
             var customer = unitOfWork.Customer.GetAll().FirstOrDefault(cst => cst.UserId == user.Id);
             if (customer != null) {
-                var userOrders = unitOfWork.Order.Find(order => order.CustomerId == customer.Id);
+                var userOrders = unitOfWork.Order.Find(order => order.CustomerId == customer.Id).OrderByDescending(order => order.Id);
                 orders.AddRange(userOrders);
             }
 

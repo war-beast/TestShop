@@ -21,11 +21,17 @@
                     <h2 class="product-name">@Model.Name</h2>
                     <div>
                         <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
+                            @for (int idx = 1; idx <= 5; idx++)
+                            {
+                                if (idx <= @Model.Rating)
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star-o"></i>
+                                }
+                            }
                         </div>
                         Реитинг товра:&nbsp;@Model.Rating
                     </div>
@@ -99,11 +105,17 @@
                                         <div class="rating-avg">
                                             <span>@Model.Rating</span>
                                             <div class="rating-stars">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
+                                                @for (int idx = 1; idx <= 5; idx++)
+                                                {
+                                                    if (idx <= @Model.Rating)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-star-o"></i>
+                                                    }
+                                                }
                                             </div>
                                         </div>
                                         <ul class="rating">
@@ -116,35 +128,35 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div style="width: 80%;"></div>
-                                                </div>
-                                                <span class="sum">3</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
-                                                    <div style="width: 60%;"></div>
-                                                </div>
-                                                <span class="sum">2</span>
-                                            </li>
-                                            <li>
-                                                <div class="rating-stars">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </div>
-                                                <div class="rating-progress">
                                                     <div></div>
                                                 </div>
                                                 <span class="sum">0</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: 80%;"></div>
+                                                </div>
+                                                <span class="sum">4</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: 40%;"></div>
+                                                </div>
+                                                <span class="sum">2</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -236,9 +248,9 @@
                                 <div class="col-md-3">
                                     <div id="review-form">
                                         <form class="review-form">
-                                            <input class="input" type="text" placeholder="Ваше имя">
-                                            <input class="input" type="email" placeholder="Ваш Email">
-                                            <textarea class="input" placeholder="Текст отзыва"></textarea>
+                                            <input class="input" type="text" placeholder="Ваше имя" id="userName">
+                                            <input class="input" type="email" placeholder="Ваш Email" id="userMail">
+                                            <textarea class="input" placeholder="Текст отзыва" id="userReview"></textarea>
                                             <div class="input-rating">
                                                 <span>Ваша оценка: </span>
                                                 <div class="stars">
@@ -249,7 +261,8 @@
                                                     <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
                                                 </div>
                                             </div>
-                                            <button class="primary-btn" id="sendReview">Отправить</button>
+                                            <div class="alert-danger" id="errorMessage"></div>
+                                            <button class="primary-btn" id="sendReview" type="button" data-product-id="@Model.Id">Отправить</button>
                                         </form>
                                     </div>
                                 </div>
@@ -273,6 +286,48 @@
     <script>
         $(document).ready(function () {
             ResetBuyButtons();
+
+            $("#sendReview").click(function () {
+                $("#errorMessage").html("");
+                var productId = $(this).data("product-id");
+                var value = $(":radio[name='rating']:checked").val();
+                var review = {
+                    UserName: $("#userName").val(),
+                    UserEmail: $("#userMail").val(),
+                    ReviewText: $("#userReview").val(),
+                    ProductId: productId,
+                    Value: value
+                };
+
+                if (review.UserName.trim() === "" || review.UserEmail.trim() === "" || review.ReviewText.trim() === "") {
+                    $("#errorMessage").html("Заполните все текстовые поля.");
+                    return;
+                }
+
+                var initialInner = $("#sendReview").html();
+                $("#sendReview").html("<img src='/Img/loader.gif' />");
+
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json;charset=utf-8",
+                    cache: false,
+                    type: 'POST',
+                    url: '/api/Common/SendReview',
+                    data: JSON.stringify(review),
+                    complete: function (data) {
+                        if (data.statusText.toLocaleLowerCase() === "ok") {
+                            $("#userReview").val("");
+                            $("#sendReview").replaceWith("<span>Отзыв отправлен.</span>");
+                        }
+                        else {
+                            $("#errorMessage").html(data.responseJSON.Message);
+                            $("#sendReview").html(initialInner);
+                        }
+                    }
+                });
+            });
         });
     </script>
 }

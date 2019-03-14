@@ -35,7 +35,7 @@ namespace TestShop.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("CreateCategory")]
+        [Route("SendShopingCard")]
         public async Task<IHttpActionResult> SendShopingCard([FromBody] ShopingCardViewModel model)
         {
             string retVal = "";
@@ -74,6 +74,22 @@ namespace TestShop.Controllers
                 retVal = "На сервере произошла ошибка при обработке заказа.";
                 return BadRequest(retVal);
             }
+
+            return Ok(retVal);
+        }
+
+        [HttpPost]
+        [Route("SendReview")]
+        public async Task<IHttpActionResult> SendReview([FromBody] ReviewViewModel model)
+        {
+            string retVal = "ok";
+            if (!ModelState.IsValid)
+                return BadRequest("Правильно заполните все поля.");
+
+            var product = unitOfWork.Products.Get(model.ProductId);
+            var rating = Math.Round((double)(product.Rating + model.Value) / 2);
+            product.Rating = (int)rating;
+            unitOfWork.Save();
 
             return Ok(retVal);
         }

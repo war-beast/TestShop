@@ -188,7 +188,18 @@ $(document).ready(function() {
             }
         });
     }
+
+    SetActiveMenuItem();
 });
+
+function SetActiveMenuItem() {
+    $(".main-nav li").each(function () {
+        if ($(this).html().indexOf($("#pageName").val()) !== -1) {
+            $(this).addClass("active");
+            $(".main-nav li:first").removeClass("active");
+        }
+    });
+}
 
 function InitaializeUpDown() {
     // Input number
@@ -238,5 +249,58 @@ function ResetBuyButtons() {
         productArray.push(selectedProduct);
         localStorage.setObject("shoping-card", productArray);
         $("#shopingItemsCount").html(productArray.length);
+    });
+}
+
+$(document).ready(function () {
+    $("#filter").click(function () {
+        CreateFilter();
+    });
+
+    $("#sortType").on("change", function () {
+        CreateFilter();
+    });
+
+    ResetBuyButtons();
+});
+
+function CreateFilter() {
+    var category = function () { };
+    var selected = new Array();
+    $(".checkbox-filter input[name='filter']:checked").each(function () {
+        var cat = new category();
+        cat.Id = $(this).data("id");
+        cat.Name = $(this).data("name");
+        selected.push(cat);
+    });
+
+    var filter = {
+        Categories: selected,
+        MinPrice: $("#price-min").val().replace(".", ","),
+        MaxPrice: $("#price-max").val().replace(".", ","),
+        Sort: $("#sortType").val()
+    };
+
+    ReloadList(filter);
+}
+
+function ReloadList(filter) {
+    $.ajax({
+        async: true,
+        type: 'POST',
+        dataType: 'json',
+        contentType: "application/json;charset=utf-8",
+        cache: false,
+        url: '/Home/SortedProducts',
+        data: JSON.stringify(filter),
+        complete: function (data) {
+            if (data.status === 200) {
+                $("#productList").html(data.responseText);
+                ResetBuyButtons();
+            }
+            else {
+                $("#productList").html("Не удалось загрузить. ");
+            }
+        }
     });
 }

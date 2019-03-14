@@ -88,8 +88,9 @@
                     var prod = $(this)[0];
                     var it = GetItemBlock(prod);
                     $("#productsInCard").append(it);
-                    totalSum += parseFloat(prod.Price.replace(",", ".")).toFixed(2) * prod.Count;
+                    totalSum += parseFloat(prod.Price.replace(",", ".")) * prod.Count;
                 });
+                totalSum = totalSum.toFixed(2);
 
                 $(".remove").click(function (e) {
                     e.preventDefault();
@@ -117,6 +118,7 @@
                         totalSum += item.Price * item.Count;
                     }
                 }
+                totalSum = totalSum.toFixed(2);
 
                 $(".order-total").html(totalSum);
                 localStorage.setObject("shoping-card", productArray);
@@ -146,8 +148,9 @@
                     if (item.Id === id) {
                         item.Count = value;
                     }
-                    totalSum += parseFloat(item.Price.replace(",", ".")).toFixed(2) * item.Count;
+                    totalSum += parseFloat(item.Price.replace(",", ".")) * item.Count;
                 }
+                totalSum = totalSum.toFixed(2);
 
                 $(".order-total").html(totalSum + "&nbsp;₽");
                 localStorage.setObject("shoping-card", productArray);
@@ -169,7 +172,7 @@
                     dataType: 'json',
                     contentType: "application/json;charset=utf-8",
                     cache: false,
-                    url: '/api/Common/CreateCategory',
+                    url: '/api/Common/SendShopingCard',
                     data: JSON.stringify(order),
                     beforeSend: function (xhr) {
                         var token = localStorage.getItem(tokenKey);

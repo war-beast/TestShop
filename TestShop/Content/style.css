@@ -1274,7 +1274,8 @@ textarea.input {
   display: none;
 }
 
-.price-filter .input-number, .order-products .input-number{
+.price-filter .input-number {
+    width: calc(50% - 7px);
     display: inline-block;
 }
 
@@ -2135,6 +2136,10 @@ textarea.input {
 /*=========================================================
 	12.1 -> ACCOUNT
 ===========================================================*/
+.hidden{
+    display:none;
+}
+
 #errMessage {
     color: #D10024;
 }
@@ -2157,6 +2162,30 @@ button {
 
 .mb-3{
     margin-bottom:3rem;
+}
+
+.menudrop {
+    z-index: 10;
+}
+.drop .menudrop {
+    display: none;
+    width: 100%;
+    box-shadow: 0 5px 5px rgba(21,21,21,0.8);
+    text-transform: none;
+    position: absolute;
+    left: 0;
+    min-width: 320px;
+    background-color: #fff;
+    margin-top: -2rem;
+}
+    .drop .menudrop li{
+        margin-bottom:1rem;
+    }
+    .drop:hover .menudrop {
+        display: block;
+    }
+.drop .menudrop ul {
+    padding: 1rem 3rem;
 }
 /*=========================================================
 	13 -> RESPONSIVE
@@ -2200,6 +2229,21 @@ button {
   .section-tab-nav li {
     margin-top: 10px;
   }
+    .header-search{
+        display:none;
+    }
+    .header-ctn{
+        display:flex;
+    }
+    .drop .menudrop {
+        display: block;
+        max-width: initial;
+        position: relative;
+        margin-top: -3rem;
+    }
+    .drop .menudrop a{
+        color:#fff;
+    }
 }
 
 @media only screen and (max-width: 480px) {
